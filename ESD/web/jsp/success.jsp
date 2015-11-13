@@ -13,5 +13,7 @@
     </head>
     <body>
         <h1>Login success!</h1>
+        
+        Welcome $[requestScope['user'].username].
     </body>
 </html>

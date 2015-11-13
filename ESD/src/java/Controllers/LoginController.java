@@ -7,7 +7,6 @@ package Controllers;
 
 import Models.User;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
@@ -17,10 +16,15 @@ import javax.servlet.http.*;
  * @author a2-painter
  */
 public class LoginController extends HttpServlet {
+    
+    public LoginController(){
+        super();
+    }
 
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        String name = request.getParameter("name");
+       
+        String name = request.getParameter("username");
         String password = request.getParameter("password");
         RequestDispatcher rd = null;
 
@@ -31,8 +35,8 @@ public class LoginController extends HttpServlet {
          * assuming login is success for now
         */
         
+        rd = request.getRequestDispatcher("/jsp/success.jsp");
         User login = new User(name, password);
-        rd = request.getRequestDispatcher("index.jsp");
         request.setAttribute("user", login);
         rd.forward(request, response);
     }
