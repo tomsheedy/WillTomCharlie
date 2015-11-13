@@ -64,12 +64,9 @@ Proposed Page Structure
 ====================================
 DB Details
 
-Host: sql4.freemysqlhosting.net
-Database name: sql496387
-Database user: sql496387
-Database password: suZYe7WXvI
-Port number: 3306
-
+- Host: sql4.freemysqlhosting.net
+- Database name: sql496387
+- Database user: sql496387
+- Database password: suZYe7WXvI
+- Port number: 3306
 ====================================
-
-
