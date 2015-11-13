@@ -1,6 +1,6 @@
 <%-- 
-    Document   : index
-    Created on : 13-Nov-2015, 11:51:40
+    Document   : success.jsp
+    Created on : 13-Nov-2015, 16:13:50
     Author     : a2-painter
 --%>
 
@@ -9,10 +9,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Success Page</title>
     </head>
     <body>
-        <h1>Welcome to TaxiCo</h1>
-        <a href="jsp/login.jsp">Please log in</a>
+        <h1>Login success!</h1>
     </body>
 </html>
