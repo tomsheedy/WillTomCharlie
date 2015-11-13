@@ -69,4 +69,5 @@ DB Details
 - Database user: sql496387
 - Database password: suZYe7WXvI
 - Port number: 3306
+
 ====================================
