@@ -53,6 +53,7 @@ public class Authenticator {
 
         } catch (Exception e) {
             System.err.println("Error: " + e);
+            return new LoginResult(loginType, "", "Fail");
         }//try
 
     }
@@ -91,7 +92,5 @@ public class Authenticator {
         return "";
     }
 
-    public static void main(String[] args) {
-    }
 
 }
