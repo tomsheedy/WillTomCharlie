@@ -13,8 +13,8 @@
     </head>
     <body>
         <form action="LoginController" method="post">
-            Username: <input type="text" name="username">
-            Password: <input type="password" name="password">
+            Username: <input type="text" name="username"><br>
+            Password: <input type="password" name="password"><br>
             <input type="submit" />
         </form>
     </body>
