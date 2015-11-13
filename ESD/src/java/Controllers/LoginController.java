@@ -5,7 +5,7 @@
  */
 package Controllers;
 
-import Models.LoginBean;
+import Models.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -25,18 +25,15 @@ public class LoginController extends HttpServlet {
         RequestDispatcher rd = null;
 
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
 
-        LoginBean login = new LoginBean(name, password);
-        request.setAttribute("LoginBean", login);
+        /**To do
+         * authenticate with database and check what type user is?
+         * assuming login is success for now
+        */
         
-        out.println("<html>");
-        out.println("<body>");
-        out.println("Hello?");
-        out.println("<>");
-        out.println("</body>");
-        out.println("</html>");
-
-        out.close();
+        User login = new User(name, password);
+        rd = request.getRequestDispatcher("index.jsp");
+        request.setAttribute("user", login);
+        rd.forward(request, response);
     }
 }
