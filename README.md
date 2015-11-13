@@ -33,3 +33,33 @@ Customer:
   - Destination address
   - Date
   - Time
+
+
+Proposed Page Structure
+- Login
+- Drivers
+  - List
+  - Add
+  - Edit
+- Customers
+  - List
+  - Add
+  - Edit
+- Jobs
+  - List
+  - Add
+  - Edit
+- Destinations
+  - List
+  - Add
+  - Edit
+- Bookings
+  - List
+  - Add
+  - Edit
+- Customer Invoice
+  - Create
+- Report
+
+
+
