@@ -11,7 +11,7 @@
     </head>
     <body>
         <c:catch var="e">
-        <h1>Hello Will and Tom!</h1>
+        <h1>Hello Will and Tom and Charlie and Hakon!</h1>
             
             
             
