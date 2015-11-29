@@ -18,7 +18,7 @@ import javax.servlet.http.*;
 public class LoginController extends HttpServlet {
     
     public LoginController(){
-        super();
+        //super();
     }
 
     @Override
@@ -26,19 +26,32 @@ public class LoginController extends HttpServlet {
        
         String name = request.getParameter("username");
         String password = request.getParameter("password");
+        
+        int id = 1;
+        
+        HttpSession session = request.getSession();
+        session.setAttribute("username", name);
+        session.setAttribute("password", password);
+        session.setAttribute("id", id);
+        
+        response.sendRedirect("success.jsp");
+        /*
+        String name = request.getParameter("username");
+        String password = request.getParameter("password");
         RequestDispatcher rd = null;
 
         response.setContentType("text/html;charset=UTF-8");
 
-        /**To do
+        **To do
          * authenticate with database and check what type user is?
          * assuming login is success for now
-        */
+        *
         
-        rd = request.getRequestDispatcher("/jsp/success.jsp");
+        rd = request.getRequestDispatcher("/index.jsp");
         User login = new User(name, password);
         request.setAttribute("user", login);
         rd.forward(request, response);
+        */
     }
 }
 

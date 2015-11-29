@@ -13,6 +13,6 @@
     </head>
     <body>
         <h1>Welcome to TaxiCo</h1>
-        <a href="jsp/login.jsp">Please log in</a>
+        <a href="login.jsp">Please log in</a>
     </body>
 </html>

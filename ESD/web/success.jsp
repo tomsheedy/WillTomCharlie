@@ -4,7 +4,7 @@
     Author     : a2-painter
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" session="true"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -13,7 +13,9 @@
     </head>
     <body>
         <h1>Login success!</h1>
-        
-        Welcome $[requestScope['user'].username].
+        ID = ${sessionScope.id}<br/>
+        user = ${sessionScope.username}<br/>
+        pass = ${sessionScope.password}
+        <!--Welcome $[requestScope['user'].username].-->
     </body>
 </html>
