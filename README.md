@@ -65,27 +65,17 @@ Proposed Page Structure
 DB Details
 
 
--------------------------------------
--------------------------------------
+
+
 NEW
--------------------------------------
-http://www.freemysqlhosting.net/
-
-Email:    tom.freemysqlhosting@sheedy.me
-
-Password: willtomcharliehakon
-
-Host:     sql4.freemysqlhosting.net
-
-Name:     sql498145
-
-Username: sql498145
-
-Password: Dn53dYTUDA
-
-Port:     3306
--------------------------------------
--------------------------------------
+- http://www.freemysqlhosting.net/
+- Email:    tom.freemysqlhosting@sheedy.me
+- Password: willtomcharliehakon
+- Host:     sql4.freemysqlhosting.net
+- Name:     sql498145
+- Username: sql498145
+- Password: Dn53dYTUDA
+- Port:     3306
 
 
 
