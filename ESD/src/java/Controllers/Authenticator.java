@@ -30,23 +30,28 @@ public class Authenticator {
             con = DriverManager.getConnection(p.URL(), p.Username(), p.Password());
             state = con.createStatement();
             String query = GetQuery(loginType, username, password);
-            rs = state.executeQuery(query);
+            if (query.length() > 0) {
 
-            String loggedInID = "";
-            String pkColumnLabel = GetPKLoginLabel(loginType);
-            int rowCount = 0;
-            //int loggedInID;
-            while (rs.next()) {
-                rowCount = rowCount + 1;
-                loggedInID = rs.getString(pkColumnLabel);
-            }
+                rs = state.executeQuery(query);
 
-            rs.close();
-            state.close();
-            con.close();
+                String loggedInID = "";
+                String pkColumnLabel = GetPKLoginLabel(loginType);
+                int rowCount = 0;
 
-            if (rowCount == 1) {
-                return new LoginResult(loginType, loggedInID, "Success");
+                while (rs.next()) {
+                    rowCount = rowCount + 1;
+                    loggedInID = rs.getString(pkColumnLabel);
+                }
+
+                rs.close();
+                state.close();
+                con.close();
+
+                if (rowCount == 1) {
+                    return new LoginResult(loginType, loggedInID, "Success");
+                } else {
+                    return new LoginResult(loginType, "", "Fail");
+                }
             } else {
                 return new LoginResult(loginType, "", "Fail");
             }
@@ -59,24 +64,19 @@ public class Authenticator {
     }
 
     public static String GetQuery(String loginType, String username, String password) {
-        String query;
-
+        String query = "";
         String usernameName = "";
         String passwordName = "";
 
         if (loginType.toLowerCase() == "drivers") {
             usernameName = "Registration";
             passwordName = "password";
-        } else if (loginType.toLowerCase() == "admin") {
-            usernameName = "username";
-            passwordName = "password";
+            query = "SELECT * FROM " + loginType + " WHERE " + usernameName + " = '" + username + "' AND " + passwordName + " = '" + password + "';";
+
         } else if (loginType.toLowerCase() == "customer") {
-            usernameName = "username";
-            passwordName = "password";
+            usernameName = "Name";
+            query = "SELECT * FROM " + loginType + " WHERE " + usernameName + " = '" + username + "'";
         }
-
-        query = "SELECT * FROM " + loginType + " WHERE " + usernameName + " = '" + username + "' AND " + passwordName + " = '" + password + "';";
-
         return query;
     }
 
@@ -84,13 +84,10 @@ public class Authenticator {
 
         if (loginType.toLowerCase() == "drivers") {
             return "Registration";
-        } else if (loginType.toLowerCase() == "admin") {
-            return "id";
         } else if (loginType.toLowerCase() == "customer") {
             return "id";
         }
         return "";
     }
-
 
 }

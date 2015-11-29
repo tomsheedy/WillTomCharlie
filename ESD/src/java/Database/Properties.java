@@ -20,13 +20,13 @@ public class Properties {
         return "com.mysql.jdbc.Driver";
     }
     public String URL() {
-        return "jdbc:mysql://sql4.freemysqlhosting.net:3306/sql496387?zeroDateTimeBehavior=convertToNull";
+        return "jdbc:mysql://sql4.freemysqlhosting.net:3306/sql498145?zeroDateTimeBehavior=convertToNull";
     }
     public String Username() {
-        return "sql496387";
+        return "sql498145";
     }
     public String Password() {
-        return "suZYe7WXvI";
+        return "Dn53dYTUDA";
     }
     
     
