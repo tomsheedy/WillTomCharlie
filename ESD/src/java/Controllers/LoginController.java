@@ -46,7 +46,7 @@ public class LoginController extends HttpServlet {
             session.setAttribute("username", name);
             session.setAttribute("id", id);
 
-            response.sendRedirect("success.jsp");
+            response.sendRedirect("admin.jsp");
         }       
     }
 }
