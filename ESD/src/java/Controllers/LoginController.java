@@ -6,6 +6,7 @@
 package Controllers;
 
 import Database.LoginResult;
+import Models.Driver;
 import Models.User;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
@@ -24,6 +25,45 @@ public class LoginController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+        String registration = request.getParameter("username");
+        String password = request.getParameter("password");
+        
+        Driver driv;
+        driv = new Driver();
+        driv.setRegistration(registration);
+        driv.setPassword(password);
+               
+        HttpSession session = request.getSession();
+        
+        session.setMaxInactiveInterval(20*60); //20 lots of 60 seconds = 20 minutes
+
+        if (driv.LogIn()) {
+                    
+            
+            Driver driverDetails = new Driver(registration);
+            session.setAttribute("id", registration);
+            session.setAttribute("name", driverDetails.getName());
+            response.sendRedirect("admin.jsp");
+            
+        } else {
+            
+            session.setAttribute("error", "Log In Failed");
+            response.sendRedirect("error.jsp");
+            
+        }   
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        /*
         Authenticator auth;
         auth = new Authenticator();
 
@@ -47,6 +87,7 @@ public class LoginController extends HttpServlet {
             session.setAttribute("id", id);
 
             response.sendRedirect("admin.jsp");
-        }       
+        }   
+                */
     }
 }
