@@ -5,6 +5,7 @@
  */
 package Controllers;
 
+import Database.LoginResult;
 import Models.User;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
@@ -16,42 +17,34 @@ import javax.servlet.http.*;
  * @author a2-painter
  */
 public class LoginController extends HttpServlet {
-    
-    public LoginController(){
+
+    public LoginController() {
         //super();
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-       
+        Authenticator auth;
+        auth = new Authenticator();
+
         String name = request.getParameter("username");
         String password = request.getParameter("password");
-        
-        int id = 1;
+
+        LoginResult res = auth.Authenticate(name, password);
+        String result = res.getLoginResult();
+        String id = res.getLoggedInID();
         
         HttpSession session = request.getSession();
-        session.setAttribute("username", name);
-        session.setAttribute("password", password);
-        session.setAttribute("id", id);
-        
-        response.sendRedirect("success.jsp");
-        /*
-        String name = request.getParameter("username");
-        String password = request.getParameter("password");
-        RequestDispatcher rd = null;
 
-        response.setContentType("text/html;charset=UTF-8");
+        if (result.contains("Fail") || "".equals(id)) {
+            session.setAttribute("error", result);
+            response.sendRedirect("error.jsp");
+            
+        } else {
+            session.setAttribute("username", name);
+            session.setAttribute("id", id);
 
-        **To do
-         * authenticate with database and check what type user is?
-         * assuming login is success for now
-        *
-        
-        rd = request.getRequestDispatcher("/index.jsp");
-        User login = new User(name, password);
-        request.setAttribute("user", login);
-        rd.forward(request, response);
-        */
+            response.sendRedirect("success.jsp");
+        }       
     }
 }
-

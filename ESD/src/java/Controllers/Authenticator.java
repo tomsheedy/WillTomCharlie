@@ -15,8 +15,9 @@ import java.sql.*;
  */
 public class Authenticator {
 
-    public static LoginResult Authenticate(String loginType, String username, String password) {
+    public static LoginResult Authenticate(String username, String password) {
 
+        int errr = 0;
         Connection con;
         Statement state;
         ResultSet rs;
@@ -29,18 +30,17 @@ public class Authenticator {
             Class.forName(p.Driver());
             con = DriverManager.getConnection(p.URL(), p.Username(), p.Password());
             state = con.createStatement();
-            String query = GetQuery(loginType, username, password);
+            String query = GetQuery(username, password);
             if (query.length() > 0) {
 
                 rs = state.executeQuery(query);
 
                 String loggedInID = "";
-                String pkColumnLabel = GetPKLoginLabel(loginType);
                 int rowCount = 0;
 
                 while (rs.next()) {
                     rowCount = rowCount + 1;
-                    loggedInID = rs.getString(pkColumnLabel);
+                    loggedInID = rs.getString("Registration");
                 }
 
                 rs.close();
@@ -48,46 +48,24 @@ public class Authenticator {
                 con.close();
 
                 if (rowCount == 1) {
-                    return new LoginResult(loginType, loggedInID, "Success");
+                    return new LoginResult(loggedInID, "Success");
                 } else {
-                    return new LoginResult(loginType, "", "Fail");
+                    return new LoginResult("", "Fail 53");
                 }
             } else {
-                return new LoginResult(loginType, "", "Fail");
+                return new LoginResult("", "Fail 56");
             }
 
         } catch (Exception e) {
             System.err.println("Error: " + e);
-            return new LoginResult(loginType, "", "Fail");
-        }//try
+            return new LoginResult("", "Fail 62: " + e + " /// " + errr);
+        }//tryerrr
 
     }
 
-    public static String GetQuery(String loginType, String username, String password) {
-        String query = "";
-        String usernameName = "";
-        String passwordName = "";
-
-        if (loginType.toLowerCase() == "drivers") {
-            usernameName = "Registration";
-            passwordName = "password";
-            query = "SELECT * FROM " + loginType + " WHERE " + usernameName + " = '" + username + "' AND " + passwordName + " = '" + password + "';";
-
-        } else if (loginType.toLowerCase() == "customer") {
-            usernameName = "Name";
-            query = "SELECT * FROM " + loginType + " WHERE " + usernameName + " = '" + username + "'";
-        }
-        return query;
-    }
-
-    public static String GetPKLoginLabel(String loginType) {
-
-        if (loginType.toLowerCase() == "drivers") {
-            return "Registration";
-        } else if (loginType.toLowerCase() == "customer") {
-            return "id";
-        }
-        return "";
+    public static String GetQuery(String username, String password) {
+        String query = "SELECT * FROM Drivers WHERE Registration = '" + username + "' AND password = '" + password + "';";
+       return query;
     }
 
 }

@@ -11,17 +11,9 @@ package Database;
  */
 public class LoginResult {
 
-    private String LoginType;
     private String LoggedInID;
     private String LoginResult;
     
-    public void setLoginType(String LoginType) {
-        this.LoginType = LoginType;
-    }
-    public String getLoginType() {
-        return this.LoginType;
-    }
-
     public void setLoggedInID(String LoggedInID) {
         this.LoggedInID = LoggedInID;
     }
@@ -36,8 +28,7 @@ public class LoginResult {
         return this.LoginResult;
     }
 
-    public LoginResult(String LoginType, String LoggedInID, String LoginResult) {
-        this.LoginType = LoginType;
+    public LoginResult(String LoggedInID, String LoginResult) {
         this.LoggedInID = LoggedInID;
         this.LoginResult = LoginResult;
     }
