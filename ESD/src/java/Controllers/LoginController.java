@@ -35,6 +35,8 @@ public class LoginController extends HttpServlet {
         String id = res.getLoggedInID();
         
         HttpSession session = request.getSession();
+        
+        session.setMaxInactiveInterval(20*60); //20 lots of 60 seconds = 20 minutes
 
         if (result.contains("Fail") || "".equals(id)) {
             session.setAttribute("error", result);
