@@ -77,11 +77,7 @@ NEW
 - Password: Dn53dYTUDA
 - Port:     3306
 
-
-
-
-
-
+OLD (for reference)
 - Host: sql4.freemysqlhosting.net
 - Database name: sql496387
 - Database user: sql496387
