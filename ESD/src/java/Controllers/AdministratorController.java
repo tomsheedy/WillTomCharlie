@@ -8,6 +8,9 @@ package Controllers;
 import Database.LoginResult;
 import Database.Properties;
 import java.sql.*;
+import Models.Driver;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -69,5 +72,14 @@ public class AdministratorController {
         String query = "SELECT * FROM Demands WHERE Date = '" + date;
        return query;
     }
-
+    
+    public static boolean listDrivers() {
+        Driver driver = new Driver();
+        
+        ArrayList<Driver> drivers = driver.List();
+        
+        System.out.println(drivers);
+        
+        return true;
+    }
 }

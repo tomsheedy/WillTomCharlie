@@ -22,6 +22,24 @@
     </servlet-mapping>
     
     <servlet>
+        <servlet-name>DriversListController</servlet-name>
+        <servlet-class>Controllers.DriversListController</servlet-class>
+    </servlet>    
+    <servlet-mapping>
+        <servlet-name>DriversListController</servlet-name>
+        <url-pattern>/DriversListController</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>CustomersListController</servlet-name>
+        <servlet-class>Controllers.CustomersListController</servlet-class>
+    </servlet>    
+    <servlet-mapping>
+        <servlet-name>CustomersListController</servlet-name>
+        <url-pattern>/CustomersListController</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
         <servlet-name>BookingController</servlet-name>
         <servlet-class>Controllers.BookingController</servlet-class>
     </servlet>

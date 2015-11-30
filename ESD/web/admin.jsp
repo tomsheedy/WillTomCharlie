@@ -15,8 +15,8 @@
         <h1>Admin Menu</h1>
         <p>Welcome user ${sessionScope.id}</p>
         <ul>
-            <li><a href="#">List Drivers [2] Charlie</a><ul><li>Add New [7]</li><li>Remove [9]</li></ul></li>
-            <li><a href="#">List Customers [2] Charlie</a></li>
+            <li><a href="DriversListController">List Drivers [2] Charlie</a><ul><li>Add New [7]</li><li>Remove [9]</li></ul></li>
+            <li><a href="CustomersListController">List Customers [2] Charlie</a></li>
             <li><a href="PrepareJobsController">Prepare Jobs [3] Tom</a></li>
             <li><a href="#">Daily Report [4] Hakon</a></li>
             <li><a href="#">List Daily Customers [5] Hakon</a></li>
