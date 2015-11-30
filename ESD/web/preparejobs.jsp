@@ -1,20 +1,21 @@
 <%-- 
-    Document   : preparejobs
-    Created on : 29-Nov-2015, 20:38:33
-    Author     : t2-sheedy
+    Document   : success.jsp
+    Created on : 13-Nov-2015, 16:13:50
+    Author     : a2-painter
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" session="true"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
-        <form action="PrepareJobsController" method="post">
-            
+        <form action='PrepareJobsController' method='post'>
+        <h1>hvsdg</h1>
+        <input name="name">
+        <input type="submit">
         </form>
     </body>
 </html>
