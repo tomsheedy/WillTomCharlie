@@ -39,8 +39,7 @@ public class LoginController extends HttpServlet {
         session.setMaxInactiveInterval(20*60); //20 lots of 60 seconds = 20 minutes
 
         if (driv.LogIn()) {
-                    
-            
+                                
             Driver driverDetails = new Driver(registration);
             session.setAttribute("id", registration);
             session.setAttribute("name", driverDetails.getName());

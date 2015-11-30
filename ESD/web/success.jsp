@@ -15,7 +15,8 @@
         <h1>Login success!</h1>
         ID = ${sessionScope.id}<br/>
         user = ${sessionScope.username}<br/>
-        pass = ${sessionScope.password}
+        pass = ${sessionScope.password}<br/>
+        str = ${sessionScope.str}
         <!--Welcome $[requestScope['user'].username].-->
     </body>
 </html>

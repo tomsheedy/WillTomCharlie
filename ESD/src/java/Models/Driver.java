@@ -11,7 +11,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  *
@@ -38,7 +38,9 @@ public class Driver {
         this.Name = name;
         this.Password = pass;
     }
+
     // </editor-fold>
+    // <editor-fold desc="Properties">
     public String getRegistration() {
         return Registration;
     }
@@ -59,7 +61,6 @@ public class Driver {
         return Password;
     }
 
-    // <editor-fold desc="Properties">
     public void setPassword(String Password) {
         this.Password = Password;
     }
@@ -119,8 +120,10 @@ public class Driver {
 
     // </editor-fold>
     // <editor-fold desc="List">
-    public List<Driver> List() {
-               
+    public ArrayList<Driver> List() {
+
+        ArrayList<Driver> results = new ArrayList<Driver>();
+
         Connection con;
         Statement state;
         ResultSet rs;
@@ -135,24 +138,20 @@ public class Driver {
             state = con.createStatement();
             String query = GetListQuery();
 
-            if (query.length() > 0) {
+            if (!"".equals(query)) {
 
                 rs = state.executeQuery(query);
 
                 String reg = "";
                 String name = "";
                 String pass = "";
-                int rowCount = 0;
-
-                List<Driver> results = null;
-                results.add(new Driver("test", "test", "test"));
 
                 while (rs.next()) {
-                    rowCount = rowCount + 1;
                     reg = rs.getString("Registration");
                     name = rs.getString("Name");
                     pass = rs.getString("password");
-                    results.add(new Driver(reg, name, pass));
+                    Driver d = new Driver(reg, name, pass);
+                    results.add(d);
                 }
 
                 rs.close();
@@ -160,23 +159,115 @@ public class Driver {
                 con.close();
 
                 return results;
-
             }
 
         } catch (Exception e) {
             System.err.println("Error: " + e);
         };
-        return null;
+        return results;
     }
 
     // </editor-fold>
     // <editor-fold desc="WriteToDB">
+    public boolean WriteToDB() {
+
+        Connection con;
+        Statement state;
+
+        Properties p;
+        p = new Properties();
+        
+        boolean result = false;
+        
+
+        try {
+
+            Class.forName(p.Driver());
+            con = DriverManager.getConnection(p.URL(), p.Username(), p.Password());
+            state = con.createStatement();
+            String query = GetWriteToDBQuery();
+
+            state.executeUpdate(query);
+            
+            result = true;
+            
+            state.close();
+            con.close();
+
+        } catch (Exception e) {
+            System.err.println("Error: " + e);
+        };
+        return result;
+    }
+
     // </editor-fold>
     // <editor-fold desc="Update">
+    public boolean Update() {
+
+        Connection con;
+        Statement state;
+
+        Properties p;
+        p = new Properties();
+
+        try {
+
+            Class.forName(p.Driver());
+            con = DriverManager.getConnection(p.URL(), p.Username(), p.Password());
+            state = con.createStatement();
+            String query = GetUpdateQuery();
+
+            if (!"".equals(query)) {
+
+                state.executeUpdate(query);
+
+                state.close();
+                con.close();
+
+                return true;
+            }
+
+        } catch (Exception e) {
+            System.err.println("Error: " + e);
+        };
+        return false;
+    }
+
     // </editor-fold>
     // <editor-fold desc="Delete">
+    public boolean Delete() {
+
+        Connection con;
+        Statement state;
+
+        Properties p;
+        p = new Properties();
+
+        try {
+
+            Class.forName(p.Driver());
+            con = DriverManager.getConnection(p.URL(), p.Username(), p.Password());
+            state = con.createStatement();
+            String query = GetDeleteQuery();
+
+            if (!"".equals(query)) {
+
+                state.executeUpdate(query);
+
+                state.close();
+                con.close();
+
+                return true;
+            }
+
+        } catch (Exception e) {
+            System.err.println("Error: " + e);
+        };
+        return false;
+    }
     // </editor-fold>
     // <editor-fold desc="DB">
+
     public String GetLogInQuery(String username, String password) {
         String query = "SELECT * FROM Drivers WHERE Registration = '" + username + "' AND password = '" + password + "';";
         return query;
@@ -184,11 +275,102 @@ public class Driver {
 
     public String GetListQuery() {
 
+        String reg = getRegistration();
+        String nam = getName();
+        String pas = getPassword();
+
+        if (reg != null) {
+        } else {
+            reg = "";
+        }
+        if (nam != null) {
+        } else {
+            nam = "";
+        }
+        if (pas != null) {
+        } else {
+            pas = "";
+        }
+
         String query = "";
         query = query + "SELECT * FROM Drivers";
-        query = query + "WHERE Registration LIKE '%" + getRegistration() + "%'";
-        query = query + "AND Name LIKE '%" + getName() + "%'";
-        query = query + "AND password LIKE '%" + getPassword() + "%'";
+        query = query + " WHERE Registration LIKE '%" + reg + "%'";
+        query = query + " AND Name LIKE '%" + nam + "%'";
+        query = query + " AND password LIKE '%" + pas + "%';";
+
+        return query;
+    }
+
+    public String GetWriteToDBQuery() {
+
+        String reg = getRegistration();
+        String nam = getName();
+        String pas = getPassword();
+
+        if (reg != null) {
+        } else {
+            return "";
+        }
+        if (nam != null) {
+        } else {
+            nam = "";
+        }
+        if (pas != null) {
+        } else {
+            pas = "";
+        }
+
+        String query = "";
+
+        query = query + "INSERT INTO Drivers";
+        query = query + " (Registration, Name, password)";
+        query = query + " VALUES";
+        query = query + " ('" + reg + "','" + nam + "','" + pas + "');";
+
+        return query;
+    }
+
+    public String GetUpdateQuery() {
+
+        String reg = getRegistration();
+        String nam = getName();
+        String pas = getPassword();
+
+        if (reg != null) {
+        } else {
+            return "";
+        }
+        if (nam != null) {
+        } else {
+            nam = "";
+        }
+        if (pas != null) {
+        } else {
+            pas = "";
+        }
+
+        String query = "";
+
+        query = query + "UPDATE Drivers";
+        query = query + " SET Registration = '" + reg + "', Name = '" + nam + "', password = '" + pas + "'";
+        query = query + " WHERE Registration = '" + reg + "';";
+
+        return query;
+    }
+
+    public String GetDeleteQuery() {
+
+        String reg = getRegistration();
+
+        if (reg != null) {
+        } else {
+            return "";
+        }
+
+        String query = "";
+
+        query = query + "DELETE FROM Drivers";
+        query = query + " WHERE Registration = '" + reg + "';";
 
         return query;
     }

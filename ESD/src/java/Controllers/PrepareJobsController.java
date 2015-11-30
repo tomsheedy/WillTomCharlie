@@ -6,9 +6,11 @@
 package Controllers;
 
 import Database.LoginResult;
+import Models.Customer;
 import Models.Driver;
 import Models.User;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -27,22 +29,26 @@ public class PrepareJobsController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            String name = "a";//request.getParameter("name");
-            String tester = "";
-            List<Driver> results;
-            Driver driv;
+            String nam = "sdfsdfsd";
+            String add = "dsdsfsdf";
+            
+            Customer newCust;
+            newCust = new Customer();
+            newCust.setName(nam);
+            newCust.setAddress(add);
+            newCust.WriteToDB();
+
+            Customer cust;
             HttpSession session = request.getSession();
 
-            driv = new Driver();
-            driv.setName(name);
-            results = driv.List();
-            
-            for (Driver d : results) {                
-                tester = tester + d.getPassword() + " // ";                
+            cust = new Customer();//, name, pass);
+            ArrayList<Customer> results = cust.List();
+            String str = "[";
+            for (Customer d : results) {
+                str = str + d.getName();
             }
-
-            
-            session.setAttribute("password", tester);
+            str = str + "]";
+            session.setAttribute("str", str);
 
             response.sendRedirect("success.jsp");
 
