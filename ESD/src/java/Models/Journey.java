@@ -48,6 +48,15 @@ public class Journey {
         this.Time = time;
     }
 
+    public Journey(String dest, int dist, int custID, String drivReg, Date date, Time time) {
+        this.Destination = dest;
+        this.Distance = dist;
+        this.CustomerID = custID;
+        this.DriversRegistration = drivReg;
+        this.Date = date;
+        this.Time = time;
+    }
+
     // </editor-fold>
     // <editor-fold desc="Properties">
     public int getID() {
@@ -334,9 +343,9 @@ public class Journey {
         String custIDStr = "Customers.id";
         String drivReg = getDriversRegistration();
         Date date = getDate();
-        String dateStr = "";
+        String dateStr = "Date";
         Time time = getTime();
-        String timeStr = "";
+        String timeStr = "Time";
 
         if (dest != null) {
         } else {
@@ -364,13 +373,13 @@ public class Journey {
         }
 
         String query = "";
-        query = query + "SELECT * FROM Journey";
-        query = query + " WHERE Destination LIKE '%" + dest + "%'";
-        query = query + " AND Distance = " + distStr;
-        query = query + " AND Customer.id = " + custIDStr;
-        query = query + " AND Drivers.Registration = '%" + drivReg + "%'";
-        query = query + " AND Date = " + dateStr + "";
-        query = query + " AND Time = " + timeStr + ";";
+        query = query + "SELECT * FROM Journey;";
+//        query = query + " WHERE Destination LIKE '%" + dest + "%'";
+//        query = query + " AND Distance = " + distStr;
+//        query = query + " AND Customer.id = " + custIDStr;
+//        query = query + " AND Drivers.Registration = '%" + drivReg + "%'";
+//        query = query + " AND Date = " + dateStr + "";
+//        query = query + " AND Time = " + timeStr + ";";
 
         return query;
     }
@@ -415,7 +424,7 @@ public class Journey {
 
         String query = "";
         query = query + "INSERT INTO Journey";
-        query = query + " (Destination, Distance, Custromer.id, Drivers.Registration, Date, Time)";
+        query = query + " (`Destination`, `Distance`, `Customer.id`, `Drivers.Registration`, `Date`, `Time`)";
         query = query + " VALUES";
         query = query + " ('" + dest + "'," + distStr + "," + custIDStr + ",'" + drivReg + "'," + dateStr + "," + timeStr + ");";
 

@@ -116,6 +116,56 @@ public class Customer {
 
         return new Customer();
     }
+    public Customer GetDetailByNameAndAddress() {
+
+        Connection con;
+        Statement state;
+        ResultSet rs;
+
+        Properties p;
+        p = new Properties();
+
+        try {
+
+            Class.forName(p.Driver());
+            con = DriverManager.getConnection(p.URL(), p.Username(), p.Password());
+            state = con.createStatement();
+            String query = GetDetailByNameAndAddressQuery();
+            if (query.length() > 0) {
+
+                rs = state.executeQuery(query);
+
+                String nam = "";
+                String add = "";
+                int id = -1;
+                int rowCount = 0;
+
+                while (rs.next()) {
+                    rowCount = rowCount + 1;
+                    nam = rs.getString("Name");
+                    add = rs.getString("Address");
+                    id = rs.getInt("id");
+                }
+
+                rs.close();
+                state.close();
+                con.close();
+
+                if (rowCount == 1) {
+                    return new Customer(nam, add, id);
+                } else {
+                    return null;
+                }
+            } else {
+                return new Customer();
+            }
+
+        } catch (Exception e) {
+            System.err.println("Error: " + e);
+        }//tryerrr
+
+        return new Customer();
+    }
 
     // </editor-fold>
     // <editor-fold desc="List">
@@ -359,6 +409,19 @@ public class Customer {
 
         query = query + "SELECT * FROM Customer";
         query = query + " WHERE id = '" + id + "';";
+
+        return query;
+    }
+
+    public String GetDetailByNameAndAddressQuery() {
+
+        String name = getName();
+        String addr = getAddress();
+
+        String query = "";
+
+        query = query + "SELECT * FROM Customer";
+        query = query + " WHERE Name = '" + name + "' AND Address = '" + addr + "';";
 
         return query;
     }

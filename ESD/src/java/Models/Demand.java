@@ -29,8 +29,23 @@ public class Demand {
         this.address = address;
         this.destination = destination;
     }
-    
-    public Demand(){
+
+    public Demand(int id, String name, String address, String destination, Date date, Time time, String status) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.destination = destination;
+        this.date = date;
+        this.time = time;
+        this.status = status;
+    }
+
+    public Demand() {
+    }
+
+    public Demand Demand(int id) {
+        this.id = id;
+        return GetDetail();
     }
 
     public int getId() {
@@ -110,6 +125,57 @@ public class Demand {
 
     }
 
+    public Demand GetDetail() {
+
+        Connection con;
+        Statement state;
+        ResultSet rs;
+
+        Properties p = new Properties();
+
+        try {
+
+            Class.forName(p.Driver());
+            con = DriverManager.getConnection(p.URL(), p.Username(), p.Password());
+            state = con.createStatement();
+            String query = GetDetailQuery();
+
+            if (!"".equals(query)) {
+
+                rs = state.executeQuery(query);
+
+                int id = -1;
+                String nam = "";
+                String add = "";
+                String destination = "";
+                Date date;
+                Time time;
+                String status = "";
+
+                while (rs.next()) {
+                    id = rs.getInt("ID");
+                    nam = rs.getString("Name");
+                    add = rs.getString("Address");
+                    destination = rs.getString("Destination");
+                    date = rs.getDate("Date");
+                    time = rs.getTime("Time");
+                    status = rs.getString("Status");
+
+                    return new Demand(id, nam, add, destination, date, time, status);
+                }
+
+                rs.close();
+                state.close();
+                con.close();
+
+            }
+
+        } catch (Exception e) {
+            System.err.println("Error: " + e);
+        };
+        return new Demand();
+    }
+
     public ArrayList<Demand> list() {
 
         ArrayList<Demand> results = new ArrayList<Demand>();
@@ -135,13 +201,20 @@ public class Demand {
                 String nam = "";
                 String add = "";
                 String destination = "";
+                Date date;
+                Time time;
+                String status = "";
 
                 while (rs.next()) {
+                    id = rs.getInt("ID");
                     nam = rs.getString("Name");
                     add = rs.getString("Address");
                     destination = rs.getString("Destination");
+                    date = rs.getDate("Date");
+                    time = rs.getTime("Time");
+                    status = rs.getString("Status");
 
-                    Demand d = new Demand(id, nam, add, destination);
+                    Demand d = new Demand(id, nam, add, destination, date, time, status);
                     results.add(d);
                 }
 
@@ -156,6 +229,38 @@ public class Demand {
             System.err.println("Error: " + e);
         };
         return results;
+    }
+
+    public boolean Delete() {
+
+        
+        Connection con;
+        Statement state;
+
+        Properties p;
+        p = new Properties();
+
+        try {
+
+            Class.forName(p.Driver());
+            con = DriverManager.getConnection(p.URL(), p.Username(), p.Password());
+            state = con.createStatement();
+            String query = GetDeleteQuery();
+
+            if (!"".equals(query)) {
+
+                state.executeUpdate(query);
+
+                state.close();
+                con.close();
+
+                return true;
+            }
+
+        } catch (Exception e) {
+            System.err.println("Error: " + e);
+        };
+        return false;
     }
 
     private String getInsertQuery() {
@@ -196,6 +301,30 @@ public class Demand {
         query = query + " WHERE Name LIKE '%" + nam + "%'";
         query = query + " AND Address LIKE '%" + add + "%';";
 
+        return query;
+    }
+
+    public String GetDetailQuery() {
+
+        int id = getId();
+        String query = "";
+
+        if (id > 0) {
+            query = query + "SELECT * FROM Demands";
+            query = query + " WHERE id = " + id + ";";
+        }
+        return query;
+    }
+
+    public String GetDeleteQuery() {
+
+        int id = getId();
+        String query = "";
+
+        if (id > 0) {
+            query = query + "DELETE FROM Demands";
+            query = query + " WHERE id = " + id + ";";
+        }
         return query;
     }
 
