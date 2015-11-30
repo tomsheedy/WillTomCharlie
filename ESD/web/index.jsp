@@ -14,5 +14,7 @@
     <body>
         <h1>Welcome to TaxiCo</h1>
         <a href="login.jsp">Please log in</a>
+        <h3>Or</h3>
+        <a href="book.jsp">Book</a>
     </body>
 </html>
