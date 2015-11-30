@@ -13,7 +13,7 @@ import java.sql.*;
  *
  * @author t2-sheedy
  */
-public class Administrator {
+public class AdministratorController {
     
 
     public static boolean produceDailyReport () {
