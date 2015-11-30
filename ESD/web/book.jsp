@@ -22,18 +22,17 @@
         Address: <input type="text" name="address"><br>
         Destination: <input type="text" name="destination"><br><br>
         What time would you like it for?:<br>
-        ASAP: <input type="checkbox" name="asap"><br>
-        Time: <input type="text" name="time" disabled="false"><br>
+        ASAP: <input type="checkbox" name="" id="asap"><br>
+        Time: <input type="text" name="" id="time"><br><br>
         <input type="submit" value="Get Quote"/>
     </form>
     
-    <<script src="link">
-        if (document.booking_form.asap === true){
-            document.booking_form.elements.time.disabled=true;
+    <script>
+        if (document.getElementById("asap").checked === true){
+            document.getElementById("time").disabled = true;
         }
         
     </script>
     
-    <%%>
 </body>
 </html>

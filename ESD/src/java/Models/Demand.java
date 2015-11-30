@@ -5,17 +5,21 @@
  */
 package Models;
 
+import Database.Properties;
+import java.sql.*;
+
 /**
  *
  * @author a2-painter
  */
 public class Demand {
+
     private int id;
     private String name;
     private String address;
     private String destination;
-    private String date;
-    private String time;
+    private Date date;
+    private Time time;
     private String status;
 
     public Demand(int id, String name, String address, String destination) {
@@ -57,19 +61,19 @@ public class Demand {
         this.destination = destination;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
-    public String getTime() {
+    public Time getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(Time time) {
         this.time = time;
     }
 
@@ -80,6 +84,39 @@ public class Demand {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public void addBooking() {
+        Connection con;
+        Statement state;
+
+        Properties p = new Properties();
+
+        try {
+            Class.forName(p.Driver());
+            con = DriverManager.getConnection(p.URL(), p.Username(), p.Password());
+            state = con.createStatement();
+            String query = "";
+        } catch (Exception e) {
+
+        }
+
+    }
     
-    
+    private String getInsertQuery(){
+        String query = "";
+        
+        String name = getName();
+        String address = getAddress();
+        String destination = getDestination();
+        Date date = getDate();
+        Time time = getTime();
+        
+        query = query + "INSERT INTO Demands";
+        query = query + " (Name, Address, Destination, Date, Time, Status)";
+        query = query + " VALUES";
+        query = query + " ('" + name + "','" + address + "');";
+        
+        return query;
+    }
+
 }
