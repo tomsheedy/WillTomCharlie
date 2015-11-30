@@ -11,11 +11,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>page</title>
     </head>
-    <body>
-        <form action='PrepareJobsController' method='post'>
-        <h1>hvsdg</h1>
-        <input name="name">
-        <input type="submit">
-        </form>
-    </body>
+<body>
+    BOOBIES
+    ${test}
+</body>
 </html>

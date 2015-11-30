@@ -23,38 +23,12 @@ import javax.servlet.http.*;
 public class PrepareJobsController extends HttpServlet {
 
     public PrepareJobsController() {
-        //super();
+        super();
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            String nam = "sdfsdfsd";
-            String add = "dsdsfsdf";
-            
-            Customer newCust;
-            newCust = new Customer();
-            newCust.setName(nam);
-            newCust.setAddress(add);
-            newCust.WriteToDB();
-
-            Customer cust;
-            HttpSession session = request.getSession();
-
-            cust = new Customer();//, name, pass);
-            ArrayList<Customer> results = cust.List();
-            String str = "[";
-            for (Customer d : results) {
-                str = str + d.getName();
-            }
-            str = str + "]";
-            session.setAttribute("str", str);
-
-            response.sendRedirect("success.jsp");
-
-        } catch (Exception e) {
-            response.sendRedirect("error.jsp");
-        }
-
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("test", "CHARLIE IS THE CHODEN ONE");
+        getServletContext().getRequestDispatcher("/WEB-INF/preparejobs.jsp").forward(request, response);
     }
 }
