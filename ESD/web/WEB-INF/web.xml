@@ -20,4 +20,13 @@
         <servlet-name>PrepareJobsController</servlet-name>
         <url-pattern>/PrepareJobsController</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>BookingController</servlet-name>
+        <servlet-class>Controllers.BookingController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>BookingController</servlet-name>
+        <url-pattern>/BookingController</url-pattern>
+    </servlet-mapping>
 </web-app>

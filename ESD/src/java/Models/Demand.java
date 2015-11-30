@@ -7,6 +7,7 @@ package Models;
 
 import Database.Properties;
 import java.sql.*;
+import java.util.ArrayList;
 
 /**
  *
@@ -27,6 +28,9 @@ public class Demand {
         this.name = name;
         this.address = address;
         this.destination = destination;
+    }
+    
+    public Demand(){
     }
 
     public int getId() {
@@ -95,27 +99,103 @@ public class Demand {
             Class.forName(p.Driver());
             con = DriverManager.getConnection(p.URL(), p.Username(), p.Password());
             state = con.createStatement();
-            String query = "";
+            String query = getInsertQuery();
+
+            state.executeUpdate(query);
+            state.close();
+            con.close();
         } catch (Exception e) {
 
         }
 
     }
-    
-    private String getInsertQuery(){
+
+    public ArrayList<Demand> list() {
+
+        ArrayList<Demand> results = new ArrayList<Demand>();
+
+        Connection con;
+        Statement state;
+        ResultSet rs;
+
+        Properties p = new Properties();
+
+        try {
+
+            Class.forName(p.Driver());
+            con = DriverManager.getConnection(p.URL(), p.Username(), p.Password());
+            state = con.createStatement();
+            String query = GetListQuery();
+
+            if (!"".equals(query)) {
+
+                rs = state.executeQuery(query);
+
+                int id = -1;
+                String nam = "";
+                String add = "";
+                String destination = "";
+
+                while (rs.next()) {
+                    nam = rs.getString("Name");
+                    add = rs.getString("Address");
+                    destination = rs.getString("Destination");
+
+                    Demand d = new Demand(id, nam, add, destination);
+                    results.add(d);
+                }
+
+                rs.close();
+                state.close();
+                con.close();
+
+                return results;
+            }
+
+        } catch (Exception e) {
+            System.err.println("Error: " + e);
+        };
+        return results;
+    }
+
+    private String getInsertQuery() {
         String query = "";
-        
-        String name = getName();
-        String address = getAddress();
-        String destination = getDestination();
-        Date date = getDate();
-        Time time = getTime();
-        
+
+        String nam = getName();
+        String add = getAddress();
+        String dest = getDestination();
+        Date dt = getDate();
+        Time tim = getTime();
+        String status = getStatus();
+
         query = query + "INSERT INTO Demands";
         query = query + " (Name, Address, Destination, Date, Time, Status)";
         query = query + " VALUES";
-        query = query + " ('" + name + "','" + address + "');";
-        
+        query = query + " ('" + nam + "','" + add + "','" + dest + "'"
+                + ",'" + dt + "','" + tim + "','" + status + "');";
+
+        return query;
+    }
+
+    public String GetListQuery() {
+
+        String nam = getName();
+        String add = getAddress();
+
+        if (nam != null) {
+        } else {
+            nam = "";
+        }
+        if (add != null) {
+        } else {
+            add = "";
+        }
+
+        String query = "";
+        query = query + "SELECT * FROM Demands";
+        query = query + " WHERE Name LIKE '%" + nam + "%'";
+        query = query + " AND Address LIKE '%" + add + "%';";
+
         return query;
     }
 
