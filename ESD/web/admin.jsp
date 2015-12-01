@@ -18,7 +18,7 @@
             <li><a href="DriversListController">List Drivers [2] Charlie</a><ul><li>Add New [7]</li><li>Remove [9]</li></ul></li>
             <li><a href="CustomersListController">List Customers [2] Charlie</a></li>
             <li><a href="PrepareJobsController">Prepare Jobs [3] Tom</a></li>
-            <li><a href="#">Daily Report [4] Hakon</a></li>
+            <li><a href="ReportController">Daily Report [4] Hakon</a></li>
             <li><a href="#">List Daily Customers [5] Hakon</a></li>
             <li><a href="#">Create Customer Invoice [8] Tom</a></li>
             <li><a href="#">Change Destination Price [10]</a></li>

@@ -47,4 +47,13 @@
         <servlet-name>BookingController</servlet-name>
         <url-pattern>/BookingController</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>ReportController</servlet-name>
+        <servlet-class>Controllers.ReportController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ReportController</servlet-name>
+        <url-pattern>/ReportController</url-pattern>
+    </servlet-mapping>
 </web-app>
