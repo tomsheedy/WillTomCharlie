@@ -236,33 +236,28 @@ public class Driver {
     // </editor-fold>
     // <editor-fold desc="Delete">
     public boolean Delete() {
-
         Connection con;
         Statement state;
-
         Properties p;
         p = new Properties();
 
         try {
-
             Class.forName(p.Driver());
             con = DriverManager.getConnection(p.URL(), p.Username(), p.Password());
             state = con.createStatement();
             String query = GetDeleteQuery();
 
             if (!"".equals(query)) {
-
                 state.executeUpdate(query);
-
                 state.close();
                 con.close();
 
                 return true;
             }
-
         } catch (Exception e) {
             System.err.println("Error: " + e);
-        };
+        }
+        
         return false;
     }
     // </editor-fold>
