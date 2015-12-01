@@ -11,10 +11,10 @@
     <head>
         <script>
             function setDelete(reg) {
-                document.getElementById('deletedReg').value = reg;
-                alert(document.getElementById('deletedReg').value);
-
-                document.myform.submit();
+                if (confirm('Are you sure you want to delete this record?')) {
+                    document.getElementById('deletedReg').value = reg;
+                    document.myform.submit();
+                }
             }
         </script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -43,6 +43,5 @@
 
             <input type="submit" value="Add New" name="addBtn" onclick="DriversListController.addNew();" />
         </form>
-
     </body>
 </html>
