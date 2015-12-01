@@ -34,7 +34,7 @@ public class DriversListController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Object regToDelete = request.getAttribute("deletedReg");
+        Object regToDelete = request.getParameter("deletedReg");
         
         if (regToDelete != null && !"".equals(regToDelete)){
             ArrayList<Driver> drivers = new ArrayList<Driver>();
@@ -42,6 +42,7 @@ public class DriversListController extends HttpServlet {
             
             driver.setRegistration(regToDelete.toString());
             driver.Delete();
+            driver.setRegistration("");
             drivers = driver.List();
             
             request.setAttribute("drivers", drivers);
