@@ -227,6 +227,66 @@ public class Journey {
 
                 return results;
             }
+            
+            
+
+        } catch (Exception e) {
+            System.err.println("Error: " + e);
+        };
+        return results;
+    }
+    
+    public ArrayList<Journey> ListByDate() {
+
+        ArrayList<Journey> results = new ArrayList<Journey>();
+
+        Connection con;
+        Statement state;
+        ResultSet rs;
+
+        Properties p;
+        p = new Properties();
+
+        try {
+
+            Class.forName(p.Driver());
+            con = DriverManager.getConnection(p.URL(), p.Username(), p.Password());
+            state = con.createStatement();
+            String query = GetListByDateQuery();
+
+            if (!"".equals(query)) {
+
+                rs = state.executeQuery(query);
+
+                int id = -1;
+                String dest = "";
+                int dist = -1;
+                int custID = -1;
+                String drivReg = "";
+                Date date = null;
+                Time time = null;
+                int rowCount = 0;
+
+                while (rs.next()) {
+                    rowCount = rowCount + 1;
+                    id = rs.getInt("id");
+                    dest = rs.getString("Destination");
+                    dist = rs.getInt("Distance");
+                    custID = rs.getInt("Customer.id");
+                    drivReg = rs.getString("Drivers.Registration");
+                    date = rs.getDate("Date");
+                    time = rs.getTime("Time");
+                    results.add(new Journey(id, dest, dist, custID, drivReg, date, time));
+                }
+
+                rs.close();
+                state.close();
+                con.close();
+
+                return results;
+            }
+            
+            
 
         } catch (Exception e) {
             System.err.println("Error: " + e);
@@ -508,5 +568,13 @@ public class Journey {
         return query;
     }
 
+    public String GetListByDateQuery() {
+        
+        int id = getID();
+        String query = "";
+        
+        query = "SELECT * FROM `Journey` WHERE Date='2015-10-14';";        
+        return query;
+    }
     // </editor-fold>
 }
