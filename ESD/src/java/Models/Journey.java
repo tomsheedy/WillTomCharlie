@@ -5,14 +5,25 @@
  */
 package Models;
 
+import Database.JSonReader;
 import Database.Properties;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Time;
 import java.util.ArrayList;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONValue;
 
 /**
  *
@@ -79,8 +90,23 @@ public class Journey {
         return Distance;
     }
 
-    public void setDistance(int Distance) {
-        this.Distance = Distance;
+    public int getDistance(String start, String end) throws MalformedURLException, IOException {
+        try {
+
+            start = start.replace(" ", "%20");
+            end = end.replace(" ", "%20");
+
+            String Surl = "https://maps.googleapis.com/maps/api/distancematrix/xml?"
+                    + "origins=" + start
+                    + "&destinations=" + end;
+            JSonReader jason = null;
+            int o = jason.getDistance(Surl);
+
+            return o;
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
+        return -1;
     }
 
     public int getCustomerID() {
@@ -236,36 +262,56 @@ public class Journey {
 
     // </editor-fold>
     // <editor-fold desc="WriteToDB">
-    public boolean WriteToDB() {
-
-        Connection con;
-        Statement state;
-
-        Properties p;
-        p = new Properties();
-
-        boolean result = false;
-
+    public int WriteToDB() throws SQLException {
+        int id = -1;
         try {
-
-            Class.forName(p.Driver());
-            con = DriverManager.getConnection(p.URL(), p.Username(), p.Password());
-            state = con.createStatement();
+            Properties p;
+            p = new Properties();
+            Connection connection = DriverManager.getConnection(p.URL(), p.Username(), p.Password());
             String query = GetWriteToDBQuery();
+            PreparedStatement statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            int affectedRows = statement.executeUpdate();
+            if (affectedRows == 1) {
+                ResultSet generatedKeys = statement.getGeneratedKeys();
+                if (generatedKeys.next()) {
+                    id = (generatedKeys.getInt(1));
+                } else {
 
-            state.executeUpdate(query);
-
-            result = true;
-
-            state.close();
-            con.close();
-
+                }
+            }
         } catch (Exception e) {
             System.err.println("Error: " + e);
         };
-        return result;
+        return id;
     }
 
+//        Connection con;
+//        Statement state;
+//
+//        Properties p;
+//        p = new Properties();
+//
+//        boolean result = false;
+//
+//        try {
+//
+//            Class.forName(p.Driver());
+//            con = DriverManager.getConnection(p.URL(), p.Username(), p.Password());
+//            state = con.createStatement();
+//            String query = GetWriteToDBQuery();
+//
+//            state.executeUpdate(query);
+//
+//            result = true;
+//
+//            state.close();
+//            con.close();
+//
+//        } catch (Exception e) {
+//            System.err.println("Error: " + e);
+//        };
+//        return result;
+    //}
     // </editor-fold>
     // <editor-fold desc="Update">
     public boolean Update() {
