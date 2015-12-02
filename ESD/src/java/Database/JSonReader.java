@@ -54,13 +54,6 @@ public class JSonReader {
 
     public static int getDistance(String url) throws IOException,  SAXException, ParserConfigurationException {
 
-//        String j = (json.toString());
-//        JSONArray rows = json.getJSONArray("rows");
-//        JSONObject elements = rows.getJSONObject(0);
-//        //JSONArray eleArr = JSONObjectToJSONArray(elements);
-//        JSONArray distance = elements.getJSONArray("distance");
-//        //String distval = (distance.get("value")).toString();
-//        return distance.toString();//"1";
         String xml = readJsonFromUrl(url);
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
