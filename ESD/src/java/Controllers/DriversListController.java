@@ -34,31 +34,24 @@ public class DriversListController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Object regToDelete = request.getAttribute("deletedReg");
+        Object regToDelete = request.getParameter("deletedReg");
         
-        if (regToDelete != null && !"".equals(regToDelete)){
+        if (regToDelete != null && !"".equals(regToDelete)) {
             ArrayList<Driver> drivers = new ArrayList<Driver>();
             Driver driver = new Driver();
             
             driver.setRegistration(regToDelete.toString());
             driver.Delete();
+            driver.setRegistration("");
             drivers = driver.List();
             
             request.setAttribute("drivers", drivers);
         }
         
         getServletContext().getRequestDispatcher("/WEB-INF/driversList.jsp").forward(request, response);
-        
     }
     
 //    public void addNew() {
 //        System.out.println("Adding new!");
-//    }
-//    
-//    public void setDelete(String reg) {
-//        Driver driver = new Driver();
-//        
-//        driver.setRegistration(reg);
-//        driver.Delete();
 //    }
 }
