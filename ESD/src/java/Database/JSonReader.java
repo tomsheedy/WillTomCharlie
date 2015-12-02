@@ -22,9 +22,6 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.json.JSONArray;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -43,7 +40,7 @@ public class JSonReader {
         return sb.toString();
     }
 
-    public static String readJsonFromUrl(String url) throws IOException, JSONException {
+    public static String readJsonFromUrl(String url) throws IOException {
         InputStream is = new URL(url).openStream();
         try {
             BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
@@ -55,7 +52,7 @@ public class JSonReader {
         }
     }
 
-    public static int getDistance(String url) throws IOException, JSONException, SAXException, ParserConfigurationException {
+    public static int getDistance(String url) throws IOException,  SAXException, ParserConfigurationException {
 
 //        String j = (json.toString());
 //        JSONArray rows = json.getJSONArray("rows");

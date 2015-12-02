@@ -22,8 +22,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Time;
 import java.util.ArrayList;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONValue;
 
 /**
  *
