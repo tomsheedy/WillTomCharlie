@@ -1,44 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
-
     <servlet>
         <servlet-name>LoginController</servlet-name>
         <servlet-class>Controllers.LoginController</servlet-class>
-    </servlet>    
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
     </servlet-mapping>
-    
-    
     <servlet>
         <servlet-name>PrepareJobsController</servlet-name>
         <servlet-class>Controllers.PrepareJobsController</servlet-class>
-    </servlet>    
+    </servlet>
     <servlet-mapping>
         <servlet-name>PrepareJobsController</servlet-name>
         <url-pattern>/PrepareJobsController</url-pattern>
     </servlet-mapping>
-    
     <servlet>
         <servlet-name>DriversListController</servlet-name>
         <servlet-class>Controllers.DriversListController</servlet-class>
-    </servlet>    
+    </servlet>
     <servlet-mapping>
         <servlet-name>DriversListController</servlet-name>
         <url-pattern>/DriversListController</url-pattern>
     </servlet-mapping>
-    
     <servlet>
         <servlet-name>CustomersListController</servlet-name>
         <servlet-class>Controllers.CustomersListController</servlet-class>
-    </servlet>    
+    </servlet>
     <servlet-mapping>
         <servlet-name>CustomersListController</servlet-name>
         <url-pattern>/CustomersListController</url-pattern>
     </servlet-mapping>
-    
     <servlet>
         <servlet-name>BookingController</servlet-name>
         <servlet-class>Controllers.BookingController</servlet-class>
@@ -47,13 +40,12 @@
         <servlet-name>BookingController</servlet-name>
         <url-pattern>/BookingController</url-pattern>
     </servlet-mapping>
-    
     <servlet>
         <servlet-name>ReportController</servlet-name>
-        <servlet-class>Controllers.ReportController</servlet-class>
+        <servlet-class>Controllers.DailyCustomers</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>ReportController</servlet-name>
-        <url-pattern>/ReportController</url-pattern>
+        <servlet-name>DailyCustomers</servlet-name>
+        <url-pattern>/DailyCustomers</url-pattern>
     </servlet-mapping>
 </web-app>

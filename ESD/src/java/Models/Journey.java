@@ -27,6 +27,9 @@ public class Journey {
     private String DriversRegistration;
     private Date Date;
     private Time Time;
+    private int JourneyPrice;
+
+    
 
     // <editor-fold desc="Constructor">
     public Journey() {
@@ -114,9 +117,23 @@ public class Journey {
     public void setTime(Time Time) {
         this.Time = Time;
     }
+    
+    public int getJourneyPrice() {
+        return JourneyPrice;
+    }
+    
+    private void setJourneyPrice(int price) {
+        this.JourneyPrice = price;
+    }
 
     // </editor-fold>
     // <editor-fold desc="GetDetail">
+    public void calculatePricing(int distance) {
+        Price p = new Price(distance);
+        p = p.GetDetail();
+        setJourneyPrice(p.getPrice());
+    }
+    
     public Journey GetDetail() {
 
         Connection con;
