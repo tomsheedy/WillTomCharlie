@@ -120,7 +120,6 @@ public class Demand {
             state.close();
             con.close();
         } catch (Exception e) {
-
         }
 
     }

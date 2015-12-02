@@ -25,7 +25,7 @@ public class GenericCustomer extends DatabaseTables {
     // <editor-fold desc="Constructor">
     public GenericCustomer() {
         columns = new ArrayList<String>();
-        entries = new ArrayList<String>();
+        columnEntries = new ArrayList<String>();
         
         columns.add("Name");
         columns.add("Address");
@@ -372,7 +372,7 @@ public class GenericCustomer extends DatabaseTables {
 
     // </editor-fold>
     public  String GetQuery() {
-        String query = "SELECT * FROM " + table + " WHERE " + columns.get(0) + " =" + entries.get(0) + "';";
+        String query = "SELECT * FROM " + table + " WHERE " + columns.get(0) + " =" + columnEntries.get(0) + "';";
         return "";
     }
 

@@ -20,54 +20,54 @@ import java.util.ArrayList;
 public class DatabaseTables {
 
     ArrayList<String> columns;
-    ArrayList<String> entries;
+    ArrayList<String> columnEntries;
     String table;
 
     // <editor-fold desc="Constructor">
     public DatabaseTables() {
         columns = new ArrayList<String>();
-        entries = new ArrayList<String>();
+        columnEntries = new ArrayList<String>();
+    }
+
+    public ArrayList<String> getColumns() {
+        return columns;
     }
 
     public DatabaseTables(String reg) {
-        this.entries.add(reg);
+        this.columnEntries.add(reg);
         //GetDetail();
     }
 
     public DatabaseTables(ArrayList<String> entry) {
-        this.entries = entry;
+        this.columnEntries = entry;
     }
 
-    // </editor-fold>
-    // <editor-fold desc="Properties">
-    public ArrayList<String> getEntry() {
-        return entries;
+    public int columnsSize() {
+        if(columns == null) {
+            
+        }
+        if(columns.size() > 0) {
+            return columns.size();
+        }
+        else {
+            return -1;
+        }
+    }
+    
+    public ArrayList<String> getColumnEntries() {
+        return columnEntries;
     }
 
     public void setVariables(ArrayList<String> entry) {
-        this.entries = entry;
+        this.columnEntries = entry;
     }
 
-//    public String getName() {
-//        return Name;
-//    }
-//
-//    public void setName(String Name) {
-//        this.Name = Name;
-//    }
-//
-//    public String getPassword() {
-//        return Password;
-//    }
-//
-//    public void setPassword(String Password) {
-//        this.Password = Password;
-//    }
+
 
     // </editor-fold>
     // <editor-fold desc="GetDetail">
     public DatabaseTables GetDetail() throws SQLException {
-        if (!entries.isEmpty()) {
+        if (!columnEntries.isEmpty()) {
             Connection con;
             Statement state;
             ResultSet rs;
@@ -93,16 +93,16 @@ public class DatabaseTables {
 
 
                     for(String column:columns){
-                        entries.add(rs.getString(column));
+                        columnEntries.add(rs.getString(column));
                     }
 
                     rs.close();
                     state.close();
                     con.close();
 
-                    if (!entries.isEmpty()) {
-                        setVariables(entries);
-                        return new DatabaseTables(entries);
+                    if (!columnEntries.isEmpty()) {
+                        setVariables(columnEntries);
+                        return new DatabaseTables(columnEntries);
                     } else {
                         return new DatabaseTables();
                     }
@@ -146,15 +146,15 @@ public class DatabaseTables {
                 String pass = "";
 
                 while (rs.next()) {
-                    entries.clear();
+                    columnEntries.clear();
 
                     for (String label : columns) {
-                        entries.add(rs.getString(label));
+                        columnEntries.add(rs.getString(label));
                     }
-//                    entries.add(rs.getString(label));
-//                    entries.add(name = rs.getString("Name"));
-//                    entries.add(pass = rs.getString("password"));
-                    DatabaseTables d = new DatabaseTables(entries);
+//                    columnEntries.add(rs.getString(label));
+//                    columnEntries.add(name = rs.getString("Name"));
+//                    columnEntries.add(pass = rs.getString("password"));
+                    DatabaseTables d = new DatabaseTables(columnEntries);
                     results.add(d);
                 }
 
@@ -277,42 +277,6 @@ public class DatabaseTables {
         return query;
     }
 
-//    public String GetListQuery() {
-//
-////        String reg = getRegistration();
-////        String nam = getName();
-////        String pas = getPassword();
-//
-////        if (reg != null) {
-////        } else {
-////            reg = "";
-////        }
-////        if (nam != null) {
-////        } else {
-////            nam = "";
-////        }
-////        if (pas != null) {
-////        } else {
-////            pas = "";
-////        }
-//
-//        String query = "";
-//        query += "SELECT * FROM " + table;
-//        query += query + " WHERE " + "Date" + " LIKE '%" + "2015-10-14" + "%'";
-//        
-//        for(int i = 1; i < columns.size(); i++) {
-//            query = query + " AND " + columns.get(i) + "LIKE '%" + entries.get(i) + "%'";
-//        }
-//        
-//        
-//        
-////        query = query + " WHERE Registration LIKE '%" + reg + "%'";
-////        query = query + " AND Name LIKE '%" + nam + "%'";
-////        query = query + " AND password LIKE '%" + pas + "%';";
-//
-//        return query;
-//    }
-
     public String GetWriteToDBQuery() {
 
 
@@ -321,41 +285,23 @@ public class DatabaseTables {
         query = query + "INSERT INTO " +table;
         query = query + " (" + columns.get(0) +", " + columns.get(1) + ", " + columns.get(2) + ")";
         query = query + " VALUES";
-        query = query + " (" + entries.get(0) +", " + entries.get(1) + ", " + entries.get(2) + ")";
+        query = query + " (" + columnEntries.get(0) +", " + columnEntries.get(1) + ", " + columnEntries.get(2) + ")";
 
         return query;
     }
 
     public String GetUpdateQuery() {
 
-//        String reg = getRegistration();
-//        String nam = getName();
-//        String pas = getPassword();
-//
-//        if (reg != null) {
-//        } else {
-//            return "";
-//        }
-//        if (nam != null) {
-//        } else {
-//            nam = "";
-//        }
-//        if (pas != null) {
-//        } else {
-//            pas = "";
-//        }
 
         String query = "";
 
         query = query + "UPDATE " +table;
-        //query = query + " SET " + columns.get(0) + "= '" + entries.get(0) + "', " + columns.get(1) + "= '" + entries.get(1) + "', " + columns.get(2) + "= '" + entries. + ")";
         for (int i = 1; i < columns.size(); i++) {
-            query += "', " + columns.get(i) + "= '" + entries.get(i);
+            query += "', " + columns.get(i) + "= '" + columnEntries.get(i);
         }
-        //query = query + " SET Registration = '" + reg + "', Name = '" + nam + "', password = '" + pas + "'";
         query += "'";
 
-        query = query + " WHERE columns.get(0) = '" + entries.get(0) + "';";
+        query = query + " WHERE columns.get(0) = '" + columnEntries.get(0) + "';";
 
         return query;
     }
@@ -371,7 +317,7 @@ public class DatabaseTables {
         String query = "";
 
         query = query + "DELETE FROM " +table;
-        query = query + " WHERE " + columns.get(0) + " = '" + entries.get(0) + "';";
+        query = query + " WHERE " + columns.get(0) + " = '" + columnEntries.get(0) + "';";
 
         return query;
     }
@@ -430,7 +376,7 @@ public class DatabaseTables {
     }
     // </editor-fold>
     public String GetQuery() {
-        String query = "SELECT * FROM " + table + " WHERE " + columns.get(0) + " =" + entries.get(0) + "';";
+        String query = "SELECT * FROM " + table + " WHERE " + columns.get(0) + " =" + columnEntries.get(0) + "';";
         return query;
     }
     

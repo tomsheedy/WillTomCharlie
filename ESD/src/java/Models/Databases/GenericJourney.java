@@ -31,7 +31,7 @@ public class GenericJourney extends DatabaseTables {
     // <editor-fold desc="Constructor">
     public GenericJourney() {
         columns = new ArrayList<String>();
-        entries = new ArrayList<String>();
+        columnEntries = new ArrayList<String>();
         
         columns.add("ID");
         columns.add("Destination");
@@ -48,7 +48,7 @@ public class GenericJourney extends DatabaseTables {
 
     // </editor-fold>
     public  String GetQuery() {
-        String query = "SELECT * FROM " + table + " WHERE " + columns.get(0) + " =" + entries.get(0) + "';";
+        String query = "SELECT * FROM " + table + " WHERE " + columns.get(0) + " =" + columnEntries.get(0) + "';";
         return "";
     }
     

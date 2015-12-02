@@ -9,26 +9,39 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <script>
+            function setDelete(reg) {
+                if (confirm('Are you sure you want to delete this record?')) {
+                    document.getElementById('deletedReg').value = reg;
+                    document.myform.submit();
+                }
+            }
+        </script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Drivers List</title>
+
     </head>
     <body>
-        <h1>Drivers List</h1>
-        
-        <table border="1px">
-            <tr>
-                <td><b>Name</b></td>
-                <td><b>Registration</b></td>
-            </tr>
-            <c:forEach items="${drivers}" var="driver">
+        <form action="DriversListController" name="myform" method="post">
+            <h1>Drivers List</h1>
+
+            <input id="deletedReg" name="deletedReg" type="hidden">
+
+            <table border="1px">
                 <tr>
-                    <td>${driver.getName()}</td>
-                    <td>${driver.getRegistration()}</td>
-                    <td><input type="submit" value="Delete" name="deleteBtn" style="background-color: red; color: white; font-weight: bold" /></td>
+                    <td><b>Name</b></td>
+                    <td><b>Registration</b></td>
                 </tr>
-            </c:forEach>
-        </table>
-        
-        <input type="submit" value="Add New" name="addBtn" />
+                <c:forEach items="${drivers}" var="driver">
+                    <tr>
+                        <td>${driver.getName()}</td>
+                        <td>${driver.getRegistration()}</td>
+                        <td><input type="button" value="Delete" name="deleteBtn" onclick="setDelete('${driver.getRegistration()}');" style="background-color: red; color: white; font-weight: bold" /></td>
+                    </tr>
+                </c:forEach>
+            </table>
+
+            <input type="submit" value="Add New" name="addBtn" onclick="DriversListController.addNew();" />
+        </form>
     </body>
 </html>
